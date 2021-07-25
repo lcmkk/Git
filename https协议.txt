@@ -1,0 +1,11 @@
+1、拉取远程仓库代码
+git clone https://github.com/lcmkk/GitStudy.git
+
+2、git push提交代码时报错403
+原因：无提交代码权限
+解决：找到本地的仓库的隐藏文件.git/config配置文件，修改以下一行代码保存重新提交即可
+url = https://github.com/lcmkk/GitStudy.git   ===> 添加git用户名和密码
+url = https://git用户名:git密码@github.com/lcmkk/GitStudy.git
+
+3、忘记gitHub密码
+参考：https://blog.csdn.net/weixin_38872236/article/details/106335419?utm_term=git%E6%9F%A5%E7%9C%8Bgithub%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-1-106335419&spm=3001.4430

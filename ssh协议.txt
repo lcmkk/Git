@@ -1,0 +1,14 @@
+一、https和ssh对比
+1、只是影响远程仓库对于用户的鉴权方式，ssh更为安全，对于git操作和命令的使用没有任何影响，
+2、推荐使用SSH方式
+
+二、配置SSH步骤
+1、生成客户端公私钥文件，安装openssh（windows应该已经默认安装），在控制台输入ssh-keygen -t rsa -C "youremail"
+注意：执行指令后连续回车即可，公私钥地址会打印在控制台上
+私钥文件：/C/Users/laichangmeng/.ssh/id_rsa
+公钥文件：/C/Users/laichangmeng/.ssh/id_rsa.pub
+2、上传公钥到远程仓库（gitHub/gitLab）
+复制公钥文件内容，到远程仓库创建ssh keys，直接粘贴创建
+
+三、拉取代码(通过ssh方式)
+git clone git@github.com:lcmkk/GitStudy.git

@@ -37,3 +37,32 @@ b.回到未来版本
 -- 先查看git历史操作记录  git reflog
 -- 找到需要回到的未来版本的编号，再次使用回退命令 git reset --hard commitId(提交编号)
 注：commitId不用写全也可，但是建议最少六位，保证提交编号唯一性
+
+7、拉取远程新提交代码
+git pull
+
+8、修改提交到远程仓库
+git push
+
+9、拉取其他分支的某条提交记录
+git cherry commitId(这个id来自其它分支)
+
+10、缓存操作（常用于解决冲突，缓存文件不会提交）
+git stash 缓存所有文件
+git stash pop 命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除
+git stash clear 删除所有缓存的stash
+git stash list  查看stash了哪些存储
+git stash apply 应用某个存储,但不会把存储从存储列表中删除
+
+11、可视化的git工具
+本人习惯于用vscode的GitLens插件
+初次在vscode使用git时会提示“Git installation not found”，需要在设置中配置git.path
+File -> Preferences -> Settings -> 搜索git.path -> 打开settings.json -> 设置为本地git安装目录下bin/git.exe
+
+12、忽略文件操作（指定哪些文件不提交）
+a.使用touch命令在本地新建一个.gitignore文件，在里面编辑忽略文件的规则
+b.常见规则如下：
+1）/js/              过滤整个js文件夹
+2）/js/a.js          过滤js文件夹下面指定的a.js文件
+3）*.js              过滤所有的后缀.js的文件
+文件中以#开头的都是注释
