@@ -1,0 +1,20 @@
+1、查看nginx进程
+ps -ef | grep nginx
+可查看nginx进程，一个master进程，多个worker进程，master进程的pid就是当前nginx进程的id
+
+或者进入nginx安装目录下的logs目录
+more nginx.pid
+
+2、杀死nginx进程（不建议使用）
+kill -TERM nginx的pid              master和worker都被立即关闭
+kill -QUIT nginx的pid              master和worker都被"优雅"关闭,worker会先处理手上的请求在关闭
+kill -HUB nginx的pid               修改nginx配置文件之后重启
+kill -USR1 `more /usr/local/nginx/logs/nginx.pid`
+重新打开日志文件，比如nginx的日志文件被删除后可执行，重新获取日志文件
+kill -WHICH worker的pid           单独关闭某个worker进程
+
+3、启动前
+nginx -t 先执行测试，看是否成功，然后再执行启动或重新加载
+nginx 启动
+nginx -s stop 关闭
+nginx -s reload  重启

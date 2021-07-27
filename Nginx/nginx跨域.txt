@@ -1,0 +1,40 @@
+一、概念
+同源策略
+请求URL的协议、域名(IP)、端口都相同就是同源，其中一个不同就是不同源。
+
+跨域
+从服务器A的页面发送异步请求到服务器B获取数据，如果服务器A和服务器B不同源，则浏览器就会提示跨域。
+控制台报错：Access XHRHttpRequest at '' from origin '' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+二、解决方案
+CORS(html5才支持) cross origin resource sharing
+跨域资源共享
+在服务端的响应加一行头信息,设置允许跨域访问
+setHeader('Access-Control-Allow-Origin', true);
+
+JSONP原理
+1、利用dom元素的src属性支持跨域获取资源的特点，如img和script标签
+2、jsonp根据script标签的src属性，把请求放在src属性中，并且发送了一个方法的名字给服务器(请求传参带上方法名：callback=getData)
+3、服务器接收到名字之后，拼接一个方法的调用，传入了返回给浏览器的数据作为参数，再返回这个方法的调用给浏览器
+4、浏览器得到响应之后把他当成js解析，就解决了跨域并且拿到了数据
+
+nginx服务端解决跨域
+1、利用CORS在被访问的服务器的配置文件的location块中添加响应头信息，设置允许跨域访问及请求的方式
+add_header Access-Control-Allow-Origin *
+add_header Access-Control-Allow-Methods GET,POST,PUT,DELETE
+
+nginx反向代理解决跨域
+原理：Nginx反向代理解决跨域问题则是利用了服务端之间的资源请求不会有跨域限制的特点实现的，具体来说就是我们前端发起的请求被Nginx拦截，再由Nginx代由转发请求到资源服务器请求资源。
+
+举例：
+比如现在我们有两个Nodejs服务，分别是http://127.0.0.1:3000 和 http://127.0.0.1:5000，5000端口对应的服务端下的页面需要发起请求3000端口所对应的服务端的资源，当然，在这种情况下如果不做任何的额外处理，请求会产生跨域。这个时候我们可以用Nginx来代理转发我们的请求，前端不去直接对资源服务器发起请求，不再是访问 http://127.0.0.1:5000/ ， 而是 http://127.0.0.1:8080/ 
+
+nginx配置如下:
+location / {
+　　proxy_pass http://127.0.0.1:5000;
+}
+
+原文链接：https://blog.csdn.net/thx9537/article/details/54836231
+
+三、curl服务器发请求
+curl -X GET|POST 请求url地址

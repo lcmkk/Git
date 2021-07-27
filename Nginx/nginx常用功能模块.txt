@@ -1,0 +1,27 @@
+一、常用模块
+静态资源部署
+Rewrite地址重写 正则表达式
+负载均衡 轮询、加权轮询、ip_hash、fair
+Web缓存
+环境部署 高可用
+用户认证模块
+
+二、核心组成
+nginx二进制可执行文件   nginx启动文件
+nginx.conf配置文件
+error.log 错误日志记录
+access.log 访问日志记录
+
+三、linux防火墙命令
+systemctl stop/start firewalld  关闭/开启防火墙
+systemctl status firewalld      查看防火墙状态
+
+四、nginx常用命令
+nginx        启动nginx
+nginx -h,-?  帮助指令
+nginx -v     只显示版本
+nginx -V     版本及配置信息
+nginx -t     测试修改配置文件能否启动成功
+nginx -s （stop/quit/reload） 强制关闭/优雅关闭/重启
+nginx -c 'nginx.conf'   
+指定启动加载的配置文件的路径,默认/usr/local/nginx/conf/nginx.conf

@@ -1,0 +1,23 @@
+一、概念
+客户端发起请求，由反向代理服务器接收，然后将请求转发给真正处理请求的服务器，客户端不需要也不知道实际处理请求的是谁，这样就隐藏了真正的Web服务器，提高了内部服务器的安全性。反向代理的对象是服务器端，正向代理正好相反，服务端不知道客户是谁，代理的对象是客户端。
+
+二、常用指令
+proxy_pass 设置被代理服务器的地址，可以是主机名称、IP地址+端口
+语法  proxy_pass URL
+所属模块 location块
+
+举例：
+location /server {
+  proxy_pass http://10.200.16.5;
+  代理的地址最后面没加'/'，会被代理到http://10.200.16.5/server/index.html，默认会拼上uri这一段
+
+  proxy_pass http://10.200.16.5/;
+  代理的地址最后面加'/'，会被代理到http://10.200.16.5/index.html，则不会带上uri这一段
+}
+
+proxy_set_header  对客户端的请求头信息做处理
+举例：
+proxy_set_header realIp $remote_addr  
+设置客户端真实IP到请求头的realIp属性中
+proxy_set_header Host $host  
+设置客户端真实域名到请求头的Host属性中

@@ -1,0 +1,70 @@
+一、小结
+默认三大块：全局块、events块、http块
+http块中可配置多个server块，每个server块可配置多个location块
+
+1、全局块配置
+注意：配置更新之后都需要通过关闭再重启nginx才能生效
+master_process 一般都是默认on，off时会关闭worker进程
+worker_process worker进程的个数，通常配置为CPU内核数
+error file [日志级别]  配置日志路径和日志级别
+日志级别：debug/info/notice/warn/error/crit/alert/emerg
+
+2、events块
+accept_mutex on/off   设置nginx序列化
+设置为on，来一个请求，只激活一个worker处理请求，效率稍高
+设置为off，来一个请求，激活全部worker，再由worker抢着处理请求
+
+multi_accept  on/off 是否允许同时接收多个网络请求
+默认off，建议设为on，并发效率高
+
+worker_connections 默认1024  配置worker进程的最大连接数
+
+3、http块
+定义mime-type，网络资源的媒体类型，让浏览器可以显示html/xml/媒体等资源
+include mime.type
+default_type application/octet-stream
+default_type用来配置nginx响应前端请求默认的mime类型
+text/plain 返回文本
+text/html  返回html页面
+application/json  返回json
+
+sendfile 默认on,可以提高nginx处理静态资源的性能
+keepalive_timeout  设置长连接的超时时间，默认75s
+建立一个tcp连接之后，不断开，继续处理请求
+
+keepalive_requests   设置一个长连接使用的次数，默认100次
+
+处理静态资源，为提高性能，加上以下三个配置,默认都是on
+sendfile on;
+tcp_nopush on;
+tcp_nodelay on;
+
+4、server块
+一个http块可设置多个server块，一个server块可配置多个location块
+listen 80；默认监听80端口
+server_name  域名/localhost/ip 多个域名用空格分隔
+先走本地的hosts文件解析，如果找不到，再走DNS域名解析
+server中配置了ip，先根据ip进行匹配，然后再匹配域名
+default_server   匹配不到其他的就会找这个默认的配置
+
+5、location块
+root  指定请求的根路径  处理结果：root路径+location路径
+alias  指定请求的根路径  处理结果：alias路径替换location路径
+如果location路径以/结尾，则alias必须以/结尾，root没有要求
+
+index 指定访问的页面，可以设置多个，从左往右依次匹配
+error_page   出错访问到的页面
+
+expires 设置缓存的时间
+add_header (Cash-Control no)
+设置响应的头信息 (设置不缓存)
+
+location的设置
+语法 location uri(变量，可以包含正则表达式，不加正则就是精确匹配)
+如 /abc   表示地址栏精确匹配abc或后面拼接?id=1(表示参数，不参与匹配)
+如 ~*^/abc\w$   匹配/abc开头，一个字母数字或下划线结尾不区分大小写
+~表示正则，*表示不区分大小写，^表示开头，\w表示一个字母数字或下划线，$结尾
+
+location的uri匹配
+1）如果location块匹配的uri没有加右边的斜杠，nginx服务器会自动做一个301的重定向，然后再次请求带右斜杠的地址；
+2）如果加了右斜杠，会直接请求，不会有一个301的重定向
