@@ -1,0 +1,43 @@
+一、简介
+NodeJs是javaScript的运行环境，前端脱离后端，直接通过js写项目
+
+二、下载
+官网：nodejs.org
+中文网址：nodejs.cn
+npm工具：下载nodejs所需模块（工具库）
+nvm工具：实现nodejs版本切换
+nrm工具：切换npm下载源
+
+三、安装
+下载msi文件，傻瓜式安装，安装完毕，命令行输入node -v检查版本
+
+四、使用运行js代码
+1、新建js文件，输入js代码
+2、命令行输入node
+3、输入运行js代码的命令：node hello.js
+
+五、模块
+nodejs内置/核心模块：http服务、fs文件操作、url路径、path路径处理、os操作系统等
+第三方nodejs模块
+自定义nodejs模块
+
+六、commonjs模块规范
+1、一个文件就是一个模块
+2、export和modul.exports来导出模块成员（声明哪些功能可以使用）
+3、通过require加载模块
+
+七、自定义nodejs模块
+#步骤1：导出成员（声明模块/文件中哪些方法可以被外部使用）
+exports.属性/方法名 = 功能
+module.exports.属性/方法名 = 变量名
+
+#步骤2：外部引入使用
+var 对象 = require('路径及文件名');
+对象.属性/方法名
+
+八、nodejs源代码
+https://github.com/nodejs/node/tree/master/lib
+
+
+
+
