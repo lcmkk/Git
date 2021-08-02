@@ -1,0 +1,22 @@
+一、概念
+node package manager：nodejs项目模块管理工具
+
+二、常用命令
+安装模块(默认装在当前目录)：npm install 模块名
+卸载模块：npm uninstall 模块名
+初始化项目：npm init -y
+查看全局安装模块路径：npm config list
+加了全局参数(会安装到全局参数)：npm install XXX -g
+
+三、npm脚本配置
+配置脚本：在package.json文件中的scripts中添加脚本
+例："start": "node index.js"
+运行脚本：npm run 脚本的键名
+例：npm run start
+
+四、推荐安装模块
+1、nodemon模块：用于自动重启，只安装到开发环境，可安装到全局
+npm install nodemon --save-dev -g
+启动项目时就使用nodemon XXX.js命令
+注意：a)之后修改js文件保存服务会自动重启
+b)修改静态资源文件直接保存，服务不用重启
