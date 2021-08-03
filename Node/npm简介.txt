@@ -5,7 +5,7 @@ node package manager：nodejs项目模块管理工具
 安装模块(默认装在当前目录)：npm install 模块名
 卸载模块：npm uninstall 模块名
 初始化项目：npm init -y
-查看全局安装模块路径：npm config list
+查看全局安装模块路径：npm config list  (安装路径：C:\Users\laichangmeng\AppData\Roaming\npm)
 加了全局参数(会安装到全局参数)：npm install XXX -g
 
 三、npm脚本配置
@@ -20,3 +20,24 @@ npm install nodemon --save-dev -g
 启动项目时就使用nodemon XXX.js命令
 注意：a)之后修改js文件保存服务会自动重启
 b)修改静态资源文件直接保存，服务不用重启
+
+五、npm源管理
+1、问题：通过npm命令下载会到国外服务器获取，下载速度慢
+2、解决：切换国内服务器的淘宝镜像源（部分依赖不能下载，可切回国外源）
+3、命令
+安装：npm install nrm -g
+查看：nrm ls              	（注：单词list缩写，查看可用服务器）
+切换：nrm use 服务器名
+测速：nrm test
+4、遇到的问题和解决方案
+1）问题：nrm : 无法加载文件 C:\Users\laichangmeng\AppData\Roaming\npm\nrm.ps1，因为在此系统上禁止运行脚本
+解决：打开Windows PowerShell（管理员）-> 输入set-ExecutionPolicy RemoteSigned改变执行策略，y确认
+2）问题：nrm ls命令报错node:internal/validators:119
+    throw new ERR_INVALID_ARG_TYPE(name, 'string', value);
+
+  解决：主要原因是版本问题，可找到nrm安装路径下的cli.js文件第十七行，注释并修改
+  C:\Users\laichangmeng\AppData\Roaming\npm\node_modules\nrm\cli.js:17
+  
+//const NRMRC = path.join(process.env.HOME, '.nrmrc');(注掉)
+const NRMRC = path.join(process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'], '.nrmrc');
+
