@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>留言本</title>
   <link rel="stylesheet" href="/public/css/bootstrap.css">
+  <link rel="shortcut icon" href="/public/favicon.ico">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
   </div>
   <div class="comments container">
     <ul class="list-group">
-      {{each msgs as msg index}}
+      {{each msgs msg index}}
       <li class="list-group-item">
         {{msg.name}}说：{{msg.content}}
         <span class="pull-right">{{msg.createTime}}</span>
