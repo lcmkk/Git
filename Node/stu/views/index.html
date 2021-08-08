@@ -69,7 +69,7 @@
   <!-- 头部 -->
   <div class="jumbotron jump">
     <div class="container">
-      <h2>学生管理-之首页</h2>
+      <h2>学生管理列表页</h2>
 
       <p> 玩转- laravel</p>
     </div>
@@ -82,8 +82,8 @@
       <!-- 左侧菜单区域   -->
       <div class="col-md-3">
         <div class="list-group">
-          <a href="./index.html" class="list-group-item active">学生列表</a>
-          <a href="./form.html" class="list-group-item">新增学生</a>
+          <a href="/stu" class="list-group-item active">学生列表</a>
+          <a href="/stu/create" class="list-group-item">新增学生</a>
         </div>
       </div>
 
@@ -117,6 +117,7 @@
                 <th>年龄</th>
                 <th>性别</th>
                 <th>添加时间</th>
+                <th>修改时间</th>
                 <th width="120">操作</th>
               </tr>
             </thead>
@@ -128,6 +129,7 @@
                 <td>{{stu.age}}</td>
                 <td>{{stu.sex}}</td>
                 <td>{{stu.create_at}}</td>
+                <td>{{stu.update_at}}</td>
                 <td>
                   <a href="">详情</a>
                   <a href="/stu/edit/{{stu.id}}">修改</a>

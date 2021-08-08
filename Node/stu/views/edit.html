@@ -68,7 +68,7 @@
   <!-- 头部 -->
   <div class="jumbotron jump">
     <div class="container">
-      <h2>学生管理</h2>
+      <h2>学生管理修改页</h2>
 
       <p> 玩转- laravel</p>
     </div>
@@ -81,8 +81,8 @@
       <!-- 左侧菜单区域   -->
       <div class="col-md-3">
         <div class="list-group">
-          <a href="./index.html" class="list-group-item ">学生列表</a>
-          <a href="./form.html" class="list-group-item active">新增学生</a>
+          <a href="/stu" class="list-group-item ">学生列表</a>
+          <a href="/stu/create" class="list-group-item active">修改学生</a>
         </div>
       </div>
 
@@ -100,10 +100,11 @@
 
         <!-- 自定义内容区域 -->
         <div class="panel panel-default">
-          <div class="panel-heading">新增学生</div>
+          <div class="panel-heading">修改学生</div>
           <div class="panel-body">
             <form class="form-horizontal" method="post" action="/stu/edit">
               <input type="hidden" name="id" value="{{stu.id}}">
+              <input type="hidden" name="create_at" value="{{stu.create_at}}">
               <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">姓名</label>
                 <div class="col-sm-5">
