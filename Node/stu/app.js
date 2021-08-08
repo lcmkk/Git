@@ -12,14 +12,18 @@ app.use('/node_modules', express.static('node_modules'))
 //3.3配置html文件使用art-template模板引擎
 app.engine('html', require('express-art-template'))
 // 3.4配置解析POST请求提交的JSON格式数据
-app.use(bodyParser.json()); //解析后放到req对象的body属性中
+app.use(bodyParser.json()) //解析后放到req对象的body属性中
 app.use(bodyParser.urlencoded({
   extended: false
-}));
+}))
 
-// 4.路由（配置学生管理路由模块）
-var stuRouter = require('./routes/stu');
-app.use('/stu', stuRouter);
+// 4.路由
+// 4.1配置登录路由模块
+var loginRouter = require('./routes/login')
+app.use('/', loginRouter)
+// 4.2配置学生管理路由模块
+var stuRouter = require('./routes/stu')
+app.use('/stu', stuRouter)
 
 //5.启动服务
 app.listen(8080, () => {

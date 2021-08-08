@@ -52,8 +52,8 @@
           <button type="submit" class="btn btn-default">搜索</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="./login.html">登录</a></li>
-          <li><a href="./register.html">注册</a></li>
+          <li><a href="/login">登录</a></li>
+          <li><a href="/register">注册</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">相关<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -69,7 +69,7 @@
   <!-- 头部 -->
   <div class="jumbotron jump">
     <div class="container">
-      <h2>学生管理-之注册</h2>
+      <h2>学生管理注册页</h2>
 
       <p> 玩转- laravel</p>
     </div>
@@ -77,14 +77,14 @@
 
   <!-- 中间内容区局 -->
   <div class="container">
-    <form action="" method="POST">
+    <form action="" method="POST" id="reg_form">
       <div class="form-group">
         <label for="username">用户名：</label>
-        <input type="text" name="username" id="username" class="form-control" value="">
+        <input type="text" name="name" id="username" class="form-control" value="">
       </div>
       <div class="form-group">
         <label for="password">密码：</label>
-        <input type="password" name="password" id="password" class="form-control" value="">
+        <input type="password" name="pwd" id="password" class="form-control" value="">
       </div>
       <div class="form-group">
         <input type="submit" value="提交" class="btn btn-success">
@@ -104,6 +104,32 @@
   <script src="/node_modules/jquery/jquery.js"></script>
   <!-- Bootstrap JavaScript 文件 -->
   <script src="/public/js/bootstrap.min.js"></script>
+  <script>
+    $('#reg_form').submit(function (e) {
+      //阻止表单提交
+      e.preventDefault()
+      //收集表单数据
+      var formData = $(this).serialize()
+      console.log(formData)
+      //发送异步请求
+      $.ajax({
+        url: '/register',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+          if (data.status === 0) {
+            window.alert('注册成功，请登录...')
+            window.location.href = '/login'
+          } else if (data.status === 1) {
+            window.alert(data.message)
+          } else if (data.status === 500) {
+            window.alert('服务器忙，请稍后重试！')
+          }
+        }
+      })
+    })
+  </script>
 
 </body>
 

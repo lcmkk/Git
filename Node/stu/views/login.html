@@ -18,7 +18,7 @@
   <div class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a href="/" class="navbar-brand">首页</a>
+        <a href="/stu" class="navbar-brand">首页</a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu"
           aria-expanded="false">
           <span class="sr-only">菜单折叠</span>
@@ -52,8 +52,8 @@
           <button type="submit" class="btn btn-default">搜索</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="./login.html">登录</a></li>
-          <li><a href="./register.html">注册</a></li>
+          <li><a href="/login">登录</a></li>
+          <li><a href="/register">注册</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">相关<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -69,7 +69,7 @@
   <!-- 头部 -->
   <div class="jumbotron jump">
     <div class="container">
-      <h2>学生管理-之登录</h2>
+      <h2>学生管理登录页</h2>
 
       <p> 玩转- laravel</p>
     </div>
@@ -77,7 +77,7 @@
 
   <!-- 中间内容区局 -->
   <div class="container">
-    <form action="" method="POST">
+    <form action="" method="POST" id="login_form">
       <div class="form-group">
         <label for="username">用户名：</label>
         <input type="text" name="uname" id="username" class="form-control" value="">
@@ -104,6 +104,31 @@
   <script src="/node_modules/jquery/jquery.js"></script>
   <!-- Bootstrap JavaScript 文件 -->
   <script src="/public/js/bootstrap.min.js"></script>
+  <script>
+    $('#login_form').submit(function (e) {
+      //阻止表单提交
+      e.preventDefault()
+      //收集表单数据
+      var formData = $(this).serialize()
+      console.log(formData)
+      $.ajax({
+        url: '/login',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        success: data => {
+          if (data.status === 0) {
+            window.alert('登录成功，跳转中...')
+            window.location.href = '/stu'
+          } else if (data.status === 1) {
+            window.alert(data.message)
+          } else if (data.status === 500) {
+            window.alert('服务器忙，请稍后重试！')
+          }
+        }
+      })
+    })
+  </script>
 
 </body>
 
