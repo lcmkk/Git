@@ -2,6 +2,7 @@
 var express = require('express')
 var fs = require('fs')
 var router = express.Router()
+var md5 = require('md5')
 
 //导入数据模型
 var StuModel = require('../models/stu')
@@ -14,14 +15,17 @@ router.get('/', (req, res) => {
     if (err) return res.status(500).send('Server error.')
     //2.加载视图并传递数据
     return res.render('index.html', {
-      stus: stus
+      stus: stus,
+      userinfo: req.session.userinfo
     })
   })
 
 })
 router.get('/create', (req, res) => {
   // 学生添加-视图
-  return res.render('post.html')
+  return res.render('post.html', {
+    userinfo: req.session.userinfo
+  })
 })
 router.get('/edit/:id', (req, res) => {
   // 学生修改-视图
@@ -35,7 +39,8 @@ router.get('/edit/:id', (req, res) => {
     var stu = stus.find(item => item.id == id)
     // 加载视图并传递数据
     return res.render('edit.html', {
-      stu: stu
+      stu: stu,
+      userinfo: req.session.userinfo
     })
   })
 })
@@ -81,6 +86,7 @@ router.post('/create', (req, res) => {
     stu.create_at = dateStr
     stu.update_at = dateStr
     stu.id = stus.length ? stus[stus.length - 1].id + 1 : 1
+    stu.pwd = md5(stu.pwd)
     // 3.3添加到数据库
     stus.push(stu)
     // 3.4写入到数据库文件（PS：需要转换成字符串再写入）
@@ -121,7 +127,7 @@ router.post('/edit', (req, res) => {
     })
     fs.writeFile('./db.json', stusStr, err => {
       if (err) res.send('服务端出错，写入文件失败')
-      // 3.5跳转到列表页
+      // 3.5跳转到列表页,session不能丢
       res.redirect('/stu')
     })
   })

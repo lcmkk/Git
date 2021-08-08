@@ -52,16 +52,7 @@
           <button type="submit" class="btn btn-default">搜索</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login">登录</a></li>
-          <li><a href="/register">注册</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">相关<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">系列一</a></li>
-              <li class="divider"></li>
-              <li><a href="#">系列二</a></li>
-            </ul>
-          </li>
+          {{ include './common/userinfo.html'}}
         </ul>
       </div>
     </div>
