@@ -1,0 +1,11 @@
+概念：类似对象，因对象的键仅限于字符串，Map对象用于解决此问题
+初始化：var map = new Map()
+API：
+map.set(key, val)   添加元素
+map.get(key)        获取键对应元素的值
+（PS:键为对象或者数组时，必须先给该键赋值，然后将赋值后的元素作为键）
+map.delete(key)    删除键对应元素
+map.has(key)        是否含有某个键
+map.clear()         清空map对象
+map.keys()          获取所有键，返回数组
+map.values()        获取所有值，返回数组

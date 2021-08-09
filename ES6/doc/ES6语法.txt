@@ -1,0 +1,88 @@
+1、新增Symbol基本数据类型
+
+2、新增Set、Map数据结构
+
+3、循环
+forEach() 循环遍历数组
+for...in  循环遍历对象
+for...of  循环遍历对象的值/循环遍历Set集合
+
+4、函数扩展
+形参可以设置默认值
+箭头函数
+rest参数
+
+5、字符串扩展
+字符串平铺  str.repeat(3)   重复三次，返回新字符串
+模板字符串  `${date.getFullYear()}-${date.getMonth()+1}-{date.getDate()}`
+
+6、模块
+1）批量导入导出（大括号必须写）
+导出模块    export {fn, name, age}
+导入模块    import {fn, name} from './app.js'
+2）单个导入导出（大括号必须写）
+导出模块    export function fn() { return '666' }
+导入模块    import {fn} from './app.js'
+3）默认导出单个数据，引入时可自定义模块名称，不加大括号
+导出模块    export default () => { return true }
+引入模块    import aaa from './app.js'
+
+7、class类
+1)ES5之前定义一个类,使用构造函数的方式
+function Stu(name, age) {
+  this.name = name
+  this.age = age
+  this.say = function () {
+    console.log('1')
+  }
+}
+var stu = new Stu('lcmkk', 18)
+
+2)ES6之后定义一个类,使用class关键字,类中使用constructor关键字
+class Stu {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+  say() {
+    console.log('2')
+  }
+}
+var stu = new Stu('lcmkk', 18)
+
+8、Promise对象
+概念：异步编程的一种解决方案，可以解决回调地狱的问题
+使用：
+var p = new Promise(function(resolve, reject){
+  异步处理代码
+}) 
+p.then(function(data) {
+  异步处理成功之后的执行代码
+}, function(err) {
+  异步处理失败之后执行的代码
+})
+
+9、ES7 async & await
+async function test() {
+  console.log(111)
+  var a = await 发送请求 （必须是Promise对象）
+  var b = await 发送请求 （必须是Promise对象）
+  console.log(a)
+  console.log(333)
+}
+test()
+console.log(222)   
+以上代码先打印111(异步方法里面的同步方法先执行)
+再打印222(先执行同步方法，再执行异步)
+再打印a的值(打印返回的Promise对象)
+最后打印333(需要等await执行完才能执行后面的方法)
+test()是异步方法，逻辑处理需要放到test()内部
+
+await作用：把异步方法变成同步执行的方法
+注意：含有await的方法必须用async修饰（配对），await必须接受Promise对象
+
+10、网络爬虫
+cheerio是nodejs的一个库，可以理解为一个NodeJS版本的JQuery，可以通过JQ语法来获取网页中的数据
+目标网站：http://bbs.itheima.com/forum-401-1.html
+需求分析：爬虫实战批量抓取传智PHP学科动态数据，获取主题名称
+代码实现：cheerio.js

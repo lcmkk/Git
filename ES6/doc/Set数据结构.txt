@@ -1,0 +1,11 @@
+概念：类似数组的对象，但是成员唯一，没有重复值
+初始化： var set = new Set([1,2])
+获取长度： set.size
+API：
+set.add() 添加成员
+set.delete() 删除成员
+set.has() 是否含有某个元素
+set.clear() 清空Set
+
+应用场景：数组去重
+实现代码：[...new Set(arr)]
